@@ -8,6 +8,7 @@
 --				
 --
 -- History:		20150101 - Updated error handling, added license information
+--				20150102 - Corrected command error in redirect option
 --
 --
 -- Notes:		None
@@ -103,7 +104,7 @@ BEGIN
 	End
 	if @Relocate = 1
 	begin
-		Set @ddbmacmd = @ddbmacmd + '-C '"''' + @SQLDatabaseName + '''=''' + '''' + @DataPath + ''''
+		Set @ddbmacmd = @ddbmacmd + '-C ' + '"''' + @SQLDatabaseName + '''=''' + '''' + @DataPath + ''''
 		Set @ddbmacmd = @ddbmacmd + '''' + @SQLDatabaseName + '_log''=''' + '''' + @LogPath + '''"'
 	end
 	if @Quiet is not null 
