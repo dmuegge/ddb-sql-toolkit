@@ -163,7 +163,7 @@ Deallocate @cur;
 -- Restore databases - Note: to restore to different target run restore command on target server but specify source server in @ClientHost parameter
 -- Restore backup from primary and complete recovery
 Use DMadmin
-Exec DMAdmin.dbo.DDBMARestore @ClientHost = 'SQL2012.ddlab.local',
+Exec dbo.DDBMARestore @ClientHost = 'SQL2012.ddlab.local',
 	@RecoveryState = 'normal',
 	@DDHost = 'dd640-01.ddlab.local',
 	@DDBoostUser = 'ddboost',
@@ -183,11 +183,11 @@ Exec dbo.DDBMARestore @ClientHost = 'SQL2012.ddlab.local',
 
 -- Restore backup from secondary leave in recovery mode for transaction log restores
 Use DMadmin
-Exec DDBMARestore @ClientHost = 'SQL2012.ddlab.local',
+Exec dbo.DDBMARestore @ClientHost = 'SQL2012.ddlab.local',
 	@BackupTimeStamp = '11/13/2014 22:32:25',
 	@RecoveryState = 'norecover',
-	@DDHost = 'dd610-02.ddlab.local',
-	@DDBoostUser = 'boost',
+	@DDHost = 'dd640-01.ddlab.local',
+	@DDBoostUser = 'ddboost',
 	@DDStorageUnit = '/Boost-SQL',
 	@SQLDatabaseName = 'Contacts',
 	@Overwrite = 1
@@ -214,15 +214,15 @@ Exec DDBMACatalog @BackupSetName = 'ContactsFull'
 
 -- Get SQL Backup Catalog entries for DatabaseName
 Use DMadmin
-Exec DDBMACatalog @DatabaseName = 'ContactsFull'
+Exec dbo.DDBMACatalog @SQLDatabaseName = 'Contacts'
 
 -- Get SQL Backup Catalog entries for time period based on backup date
 Use DMadmin
-Exec DDBMACatalog
+Exec DDBMACatalog @BackupTimeStart = '12/25/2014', @BackupTimeEnd = '12/31/2014'
 
--- Get SQL Backup Catalog entries for time period based on expiration date
+-- Get SQL Backup Catalog entries for specific database and time period based on expiration date
 Use DMadmin
-Exec DDBMACatalog
+Exec DDBMACatalog @SQLDatabaseName = 'Contacts', @BackupExpireStart = '12/25/2014', @BackupExpireEnd = '12/31/2014'
 
 -- Delete SQL Backup Catalog entries for time period based on expiration date
 Use DMadmin
@@ -266,11 +266,12 @@ Exec dbo.DDBMAExpire @AppType = 'mssql',
 Use DMadmin
 declare @StartDatetime varchar(25) = convert(varchar(25),Format(dateadd(day,-100,getdate()), 'MM/dd/yyyy hh:mm:ss'))
 declare @EndDatetime varchar(25) = convert(varchar(25),Format(dateadd(day,-90,getdate()), 'MM/dd/yyyy hh:mm:ss'))
+
 Exec dbo.DDBMAExpire @AppType = 'mssql',
 	@ConfigFile = 'C:\dd640-dm.cfg',
-	@StartTime = '11/18/2014 10:45:40',
-	@EndTime = '11/18/2014 10:45:40',
-	@SaveSet = 'Contacts_Full',
+	@StartTime = '11/21/2014 00:00:01',
+	@EndTime = '11/21/2014 23:59:59',
+	@SaveSet = 'ContactsFull',
 	@DelExpired = 1,
 	@Clean = NULL,
 	@Verbose = NULL

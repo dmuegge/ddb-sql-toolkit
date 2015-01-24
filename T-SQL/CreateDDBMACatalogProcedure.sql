@@ -66,8 +66,8 @@ BEGIN
 		  ',[BackupLevel]' +
 		  ',[BackupSetName]' +
 		  ',[BackupSetDescription]' +
-		  ',Format([BackupDate], ''MM/dd/yyyy hh:mm:ss'') As BackupDate' +
-		  ',Format([ExpDate], ''MM/dd/yyyy hh:mm:ss'') As ExpDate' +
+		  ',Concat(Convert(varchar(50),BackupDate, 101),'' '',Convert(varchar(50),BackupDate, 108)) As BackupDate' +
+		  ',Concat(Convert(varchar(50),ExpDate, 101),'' '',Convert(varchar(50),ExpDate, 108)) As ExpDate' +
 		  ',[DDHost]' +
 		  ',[DDStorageUnit]' +
 		  ',[DatabaseName]' +
@@ -81,6 +81,7 @@ BEGIN
 		if @wherecount = 0
 		Begin
 			SET @SQLCatalogCmd = @SQLCatalogCmd + ' Where ClientHost = ''' + @ClientHost + ''''
+			SET @wherecount = 1
 		End
 		if @wherecount > 0
 		Begin
@@ -92,6 +93,7 @@ BEGIN
 		if @wherecount = 0
 		Begin
 			SET @SQLCatalogCmd = @SQLCatalogCmd + ' Where BackupSetName = ''' + @BackupSetName + ''''
+			SET @wherecount = 1
 		End
 		if @wherecount > 0
 		Begin
@@ -103,6 +105,7 @@ BEGIN
 		if @wherecount = 0
 		Begin
 			SET @SQLCatalogCmd = @SQLCatalogCmd + ' Where DDHost = ''' + @DDHost + ''''
+			SET @wherecount = 1
 		End
 		if @wherecount > 0
 		Begin
@@ -114,6 +117,7 @@ BEGIN
 		if @wherecount = 0
 		Begin
 			SET @SQLCatalogCmd = @SQLCatalogCmd + ' Where DDStorageUnit = ''' + @DDStorageUnit + ''''
+			SET @wherecount = 1
 		End
 		if @wherecount > 0
 		Begin
@@ -125,6 +129,7 @@ BEGIN
 		if @wherecount = 0
 		Begin
 			SET @SQLCatalogCmd = @SQLCatalogCmd + ' Where DatabaseName = ''' + @SQLDatabaseName + ''''
+			SET @wherecount = 1
 		End
 		if @wherecount > 0
 		Begin
@@ -136,6 +141,7 @@ BEGIN
 		if @wherecount = 0
 		Begin
 			SET @SQLCatalogCmd = @SQLCatalogCmd + ' Where SQLInstance = ''' + @SQLInstanceName + ''''
+			SET @wherecount = 1
 		End
 		if @wherecount > 0
 		Begin
@@ -147,6 +153,7 @@ BEGIN
 		if @wherecount = 0
 		Begin
 			SET @SQLCatalogCmd = @SQLCatalogCmd + ' Where BackupLevel = ''' + @BackupLevel + ''''
+			SET @wherecount = 1
 		End
 		if @wherecount > 0
 		Begin
@@ -158,6 +165,7 @@ BEGIN
 		if @wherecount = 0
 		Begin
 			SET @SQLCatalogCmd = @SQLCatalogCmd + ' Where BackupDate Between ''' + @BackupTimeStart + ''' and ''' + @BackupTimeEnd + ''''
+			SET @wherecount = 1
 		End
 		if @wherecount > 0
 		Begin
@@ -169,6 +177,7 @@ BEGIN
 		if @wherecount = 0
 		Begin
 			SET @SQLCatalogCmd = @SQLCatalogCmd + ' Where ExpDate Between ''' + @BackupExpireStart + ''' and ''' + @BackupExpireEnd + ''''
+			SET @wherecount = 1
 		End
 		if @wherecount > 0
 		Begin

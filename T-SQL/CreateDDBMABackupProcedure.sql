@@ -73,7 +73,7 @@ BEGIN
 	if @SQLDatabaseName is null raiserror('Null values not allowed for SQLDatabaseName', 16, 1)
 	
 	declare @ddbmacmd nvarchar(4000);
-	declare @EXPDate varchar(25) = convert(varchar(25),Format(dateadd(day,@RetentionDays,getdate()), 'MM/dd/yyyy hh:mm:ss'))
+	declare @EXPDate varchar(25) = Concat(Convert(varchar(20),dateadd(day,@RetentionDays,getdate()), 101),' ',Convert(varchar(20),dateadd(day,@RetentionDays,getdate()), 108));
 	declare @cur cursor;
 	declare @line nvarchar(4000);
 	declare @rcode bit;
@@ -152,7 +152,6 @@ BEGIN
 		IF @line LIKE '%thread started%tid%internal tid%'
 		BEGIN
 			Set @BackupTime = Substring(@Line,1,CHARINDEX('.',@Line) - 1)
-			
 		END
 		
 		-- Check if backup was successful
@@ -174,7 +173,7 @@ BEGIN
 							@BackupSetName, 
 							@BackupSetDescription,
 							(Select convert(datetime,@BackupTime)),
-							@ExpDate,
+							(Select convert(datetime,@ExpDate)),
 							@DDHost,
 							@DDStorageUnit,
 							@SQLDatabaseName,	
