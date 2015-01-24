@@ -7,24 +7,24 @@ This is a list of the files included in the toolkit and a brief description. Add
 
 SQL Stored Procedures
 -------------------------------------------------------------------------
-Create-DDBMABackup-Procedure.sql - T-SQL to create backup procedure
-Create-DDBMARestore-Procedure.sql - T-SQL to create restore procedure
-Create-DDBMAExpire-Procedure.sql - T-SQL to create expire procedure
-Create-DDBMACatalog-Procedure.sql - T-SQL to create catalog procedure
+CreateDDBMABackupProcedure.sql - T-SQL to create backup procedure
+CreateDDBMARestoreProcedure.sql - T-SQL to create restore procedure
+CreateDDBMAExpireProcedure.sql - T-SQL to create expire procedure
+CreateDDBMACatalogProcedure.sql - T-SQL to create catalog procedure
 
 SQL Table
 -------------------------------------------------------------------------
-Create-DDBMASQLCatalog-Table.sql - T-SQL to create catalog table
+CreateDDBMASQLCatalogTable.sql - T-SQL to create catalog table
 
 
 T-SQL Examples for calling procedures
 -------------------------------------------------------------------------
-Execute_Procedures_Examples.sql
+ExecuteProceduresExamples.sql
 
 
 T-SQL for Prerequisite configuration and example DD Boost configuration file
 -------------------------------------------------------------------------
-PreRequisite_Configuration.sql
+PreRequisiteConfiguration.sql
 DDBMA_SQL_Example.cfg
 
 

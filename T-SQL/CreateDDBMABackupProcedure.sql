@@ -8,7 +8,8 @@
 --				RetentionDays will default to 30 days and SQLInstanceName to default instance
 -- 
 --
--- History:		20150101 - Updated error handling, added license information	 
+-- History:		20150101 - Updated error handling, added license information
+--				20150124 - Updated ExpDate format	 
 --
 --
 -- Notes:		None

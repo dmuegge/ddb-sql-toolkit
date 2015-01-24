@@ -8,6 +8,7 @@
 --				
 --
 -- History:		20150101 - Updated error handling, added license information
+--				20150124 - Updated select statement BackupDate and ExpDate format and wherecount set statements
 --
 --
 -- Notes:		None
